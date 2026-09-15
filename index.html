@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E2 2026/2027 – SF01</title>
+<link rel="icon" href="fussball.png" type="image/png">
+<style>
+@font-face{font-family:'72';font-weight:400;font-style:normal;src:url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Regular.woff2') format('woff2'),url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Regular.woff') format('woff')}
+@font-face{font-family:'72';font-weight:700;font-style:normal;src:url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Bold.woff2') format('woff2'),url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Bold.woff') format('woff')}
+@font-face{font-family:'72';font-weight:300;font-style:normal;src:url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Light.woff2') format('woff2'),url('https://sdk.openui5.org/resources/sap/ui/core/themes/sap_horizon/fonts/72-Light.woff') format('woff')}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'72','72full',Arial,Helvetica,sans-serif}
+body{font-family:'72','72full',Arial,Helvetica,sans-serif;background:#f2f2f2;color:#1a1a1a;font-size:14px}
+header{background:#fff;color:#111;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;min-height:56px;border-bottom:3px solid #dc2626}
+header img{height:40px;width:auto;object-fit:contain}
+header h1{font-size:17px;font-weight:600;letter-spacing:.02em}
+header span{font-size:11px;opacity:.45;position:absolute;right:16px;color:#111}
+#lock-btn{position:absolute;left:12px;background:none;border:none;cursor:pointer;font-size:15px;opacity:.25;padding:4px 6px;transition:opacity .15s;line-height:1}
+#lock-btn:hover{opacity:.9}
+.tabs{display:flex;background:#1e1e1e;padding:0 20px;flex-wrap:wrap;justify-content:center}
+.tab-btn{padding:10px 18px;background:none;border:none;color:#888;cursor:pointer;font-size:13px;border-bottom:3px solid transparent;transition:all .15s}
+.tab-btn.active{color:#fff;border-bottom-color:#dc2626}
+.tab-btn:hover:not(.active){color:#ccc}
+.tab-content{display:none;padding:20px;max-width:860px;margin:0 auto}
+.tab-content.active{display:block}
+.card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;margin-bottom:16px;overflow:hidden}
+.card-header{padding:10px 16px;background:#f8f8f8;border-bottom:1px solid #e0e0e0;font-weight:600;font-size:13px;color:#222;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card-body{padding:16px}
+label{font-size:12px;color:#555;font-weight:500}
+select,input[type=number],input[type=text],input[type=date]{border:1px solid #ccc;border-radius:5px;padding:5px 8px;font-size:13px;background:#fff;color:#1a1a1a}
+select:focus,input:focus{outline:none;border-color:#dc2626;box-shadow:0 0 0 2px #fee2e2}
+input[type=number]{width:60px;text-align:center}
+input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:#dc2626}
+table{width:100%;border-collapse:collapse}
+th{background:#f0f0f0;padding:7px 10px;text-align:left;font-size:12px;color:#555;font-weight:600;white-space:nowrap}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{background:#e8e8e8}
+th.sort-active{background:#fde8e8 !important;color:#b91c1c}
+th.group-header{text-align:center;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#888;background:#f5f5f5;padding:5px 8px;border-bottom:1px solid #e0e0e0}
+th.group-sep,td.group-sep{border-left:2px solid #ddd}
+td{padding:6px 10px;border-top:1px solid #ebebeb;vertical-align:middle}
+tr:hover td{background:#fafafa}
+tr.sf01-win td{background:#f0fff4}
+tr.sf01-draw td{background:#fffff0}
+tr.sf01-loss td{background:#fff5f5}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600}
+.badge-w{background:#d1fae5;color:#065f46}
+.badge-d{background:#fef3c7;color:#78350f}
+.badge-l{background:#fee2e2;color:#991b1b}
+.btn{padding:7px 16px;border-radius:5px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:background .15s}
+.btn-primary{background:#dc2626;color:#fff}
+.btn-primary:hover{background:#b91c1c}
+.btn-sm{padding:4px 10px;font-size:12px}
+.btn-ghost{background:#f0f0f0;color:#444;border:1px solid #ccc}
+.btn-ghost:hover{background:#e5e5e5}
+.btn-danger{background:#fca5a5;color:#7f1d1d}
+.btn-danger:hover{background:#f87171}
+.btn-add{background:#fff5f5;color:#991b1b;border:1px dashed #fca5a5}
+.btn-add:hover{background:#fee2e2}
+.result-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.result-row .opp-name{flex:1;min-width:180px}
+.score-sep{font-weight:700;color:#666}
+.stat-number{text-align:right;font-variant-numeric:tabular-nums}
+.highlight{font-weight:700;color:#dc2626}
+#save-toast{position:fixed;bottom:20px;right:20px;background:#111;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;display:none;animation:fadein .3s}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.round-switch{display:flex;border:1px solid #ccc;border-radius:6px;overflow:hidden}
+.round-btn{padding:6px 16px;background:#fff;border:none;cursor:pointer;font-size:13px;color:#555;transition:background .1s}
+.round-btn.active{background:#dc2626;color:#fff;font-weight:600}
+.turnier-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.t-pill{padding:5px 12px;border-radius:12px;background:#f0f0f0;border:1px solid #ccc;cursor:pointer;font-size:12px;color:#555;transition:all .1s;display:flex;align-items:center;gap:5px}
+.t-pill.active{background:#dc2626;color:#fff;border-color:#dc2626}
+.t-pill.has-data{border-color:#dc2626}
+.t-pill .trikot-dot{width:7px;height:7px;border-radius:50%;background:#dc2626;display:inline-block}
+.new-turnier-form{background:#f8f8f8;border:1px dashed #ccc;border-radius:8px;padding:14px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.new-turnier-form .fg{display:flex;flex-direction:column;gap:4px}
+.new-turnier-form label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em}
+.new-turnier-form input{min-width:160px}
+.trikot-row{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#fff5f5;border-bottom:1px solid #fca5a5}
+.trikot-row label{font-size:12px;font-weight:600;color:#991b1b;white-space:nowrap}
+.empty-note{text-align:center;padding:28px;color:#aaa;font-size:13px}
+.podeste-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+@media(max-width:560px){.podeste-grid{grid-template-columns:1fr}}
+.podest-card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;padding:14px 10px 0}
+.podest-title{font-size:12px;font-weight:700;text-align:center;margin-bottom:14px;color:#222}
+.podest{display:flex;align-items:flex-end;justify-content:center;gap:6px}
+.podest-slot{display:flex;flex-direction:column;align-items:center;width:76px}
+.podest-name{font-size:11px;font-weight:700;text-align:center;color:#222;line-height:1.2;margin-bottom:3px;word-break:break-word}
+.podest-val{font-size:17px;font-weight:800;text-align:center;margin-bottom:4px;color:#1a1a1a}
+.podest-bar{width:100%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:rgba(255,255,255,.9);border-radius:5px 5px 0 0}
+.podest-bar.r1{height:80px;background:linear-gradient(170deg,#ffe066,#c89000)}
+.podest-bar.r2{height:54px;background:linear-gradient(170deg,#d8d8d8,#9a9a9a)}
+.podest-bar.r3{height:36px;background:linear-gradient(170deg,#e8c09a,#b8763c)}
+</style>
+</head>
+<body>
+
+<header>
+  <button id="lock-btn" onclick="showPinDialog()" title="Wartungsmodus">🔒</button>
+  <h1>E2-Jugend</h1>
+  <img src="Sportfreunde_logo.jpg" alt="SF01 Logo">
+  <h1>2026/2027</h1>
+  <span id="last-saved"></span>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="eingabe">Turniere</button>
+  <button class="tab-btn" data-tab="uebersicht">Turnierübersicht</button>
+  <button class="tab-btn" data-tab="statistik">Spielerstatistik</button>
+  <button class="tab-btn" data-tab="tabelle">Tabelle</button>
+  <button class="tab-btn" data-tab="trikots"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg>Trikotwäsche</button>
+</div>
+
+<!-- EINGABE -->
+<div id="tab-eingabe" class="tab-content active">
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+    <div class="round-switch">
+      <button class="round-btn active" data-round="hinrunde">Hinrunde</button>
+      <button class="round-btn" data-round="rueckrunde">Rückrunde</button>
+    </div>
+  </div>
+
+  <div class="turnier-pills" id="turnier-pills"></div>
+  <div id="new-turnier-form-area"></div>
+  <div id="turnier-content"></div>
+</div>
+
+<!-- STATISTIK -->
+<div id="tab-statistik" class="tab-content">
+  <div id="podeste" class="podeste-grid"></div>
+  <div class="card">
+    <div class="card-header">
+      Spielerstatistik – Gesamt
+      <span style="margin-left:auto;font-size:11px;color:#718096;font-weight:400">Klick auf Kopfzeile zum Sortieren</span>
+    </div>
+    <div class="card-body" style="padding:0;overflow-x:auto">
+      <table id="stats-table">
+        <thead>
+          <tr>
+            <th colspan="5" class="group-header">Saison</th>
+            <th colspan="3" class="group-header group-sep">Hinrunde</th>
+            <th colspan="3" class="group-header group-sep">Rückrunde</th>
+          </tr>
+          <tr>
+            <th class="sortable" data-col="name">Spieler</th>
+            <th class="sortable stat-number" data-col="spiele">Spiele</th>
+            <th class="sortable stat-number" data-col="tore">Tore</th>
+            <th class="sortable stat-number" data-col="vorlagen">Vorlagen</th>
+            <th class="sortable stat-number" data-col="scorer">Scorer</th>
+            <th class="sortable stat-number group-sep" data-col="spiele_h">Sp</th>
+            <th class="sortable stat-number" data-col="tore_h">Tore</th>
+            <th class="sortable stat-number" data-col="vorl_h">Vorl</th>
+            <th class="sortable stat-number group-sep" data-col="spiele_r">Sp</th>
+            <th class="sortable stat-number" data-col="tore_r">Tore</th>
+            <th class="sortable stat-number" data-col="vorl_r">Vorl</th>
+          </tr>
+        </thead>
+        </tr></thead>
+        <tbody id="stats-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TABELLE -->
+<div id="tab-tabelle" class="tab-content">
+  <div class="card">
+    <div class="card-header">
+      Tabelle – alle Gegner
+      <button class="btn btn-ghost btn-sm" id="tabelle-reset-sort" style="margin-left:auto">↺ Standard-Sortierung</button>
+    </div>
+    <div class="card-body" style="padding:0;overflow-x:auto">
+      <table id="tabelle-table">
+        <thead><tr>
+          <th class="sortable" data-col="gegner">Gegner</th>
+          <th class="sortable stat-number sort-active" data-col="pts">Pkt</th>
+          <th class="sortable stat-number" data-col="spiele">Sp</th>
+          <th class="sortable stat-number" data-col="s">S</th>
+          <th class="sortable stat-number" data-col="u">U</th>
+          <th class="sortable stat-number" data-col="n">N</th>
+          <th class="sortable stat-number" data-col="tf">T+</th>
+          <th class="sortable stat-number" data-col="tg">T-</th>
+          <th class="sortable stat-number" data-col="diff">Diff</th>
+        </tr></thead>
+        <tbody id="tabelle-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">Ergebnisse je Turnier</div>
+    <div class="card-body" style="padding:0;overflow-x:auto">
+      <table id="results-table">
+        <thead><tr>
+          <th>Runde</th><th>Datum</th><th>Austragungsort</th><th>Gegner</th>
+          <th style="text-align:right">SF01</th><th style="text-align:right">Gegner</th><th>Erg.</th>
+        </tr></thead>
+        <tbody id="results-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- UEBERSICHT -->
+<div id="tab-uebersicht" class="tab-content">
+  <div id="uebersicht-container"></div>
+</div>
+
+<!-- TRIKOTS -->
+<div id="tab-trikots" class="tab-content">
+  <div class="card">
+    <div class="card-header"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg> Trikotwäsche – Übersicht</div>
+    <div class="card-body" style="padding:0;overflow-x:auto">
+      <table id="trikots-table">
+        <thead><tr>
+          <th>Runde</th><th>Datum</th><th>Austragungsort</th><th>Trikots gewaschen</th>
+        </tr></thead>
+        <tbody id="trikots-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="save-toast">Gespeichert ✓</div>
+
+<script>
+const JERSEY = `<svg width="13" height="13" viewBox="0 0 24 24" style="vertical-align:middle"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg>`;
+const STORAGE_KEY = 'e2_sf01_2026_v2';
+
+const PLAYERS_H = ['Friedi','Jakob','Noah','Luis','Maximilian','Nepomuk','Oskar','Paul','Richard','Friedrich','Branko','Heino','Walter'];
+const PLAYERS_R = ['Friedi','Jakob','Frodo','Luis','Maximilian','Nepomuk','Oskar','Paul','Richard','Friedrich','Branko','Heino','Walter'];
+const ALL_PLAYERS = [...new Set([...PLAYERS_H, ...PLAYERS_R])];
+
+function mkPlayerStats(players) {
+  return players.map(n => ({name:n, gespielt:false, tore:0, vorl:0}));
+}
+
+const SEED = {
+  hinrunde: [
+    { date:'29.08.2026', venue:'SV Dresden-Neustadt', trikot:'',
+      players:[
+        {name:'Friedi',gespielt:true,tore:2,vorl:0},{name:'Jakob',gespielt:true,tore:2,vorl:0},
+        {name:'Noah',gespielt:true,tore:4,vorl:0},{name:'Luis',gespielt:true,tore:0,vorl:0},
+        {name:'Maximilian',gespielt:true,tore:2,vorl:0},{name:'Nepomuk',gespielt:true,tore:1,vorl:0},
+        {name:'Oskar',gespielt:true,tore:6,vorl:0},{name:'Paul',gespielt:false,tore:0,vorl:0},
+        {name:'Richard',gespielt:true,tore:4,vorl:0},{name:'Friedrich',gespielt:true,tore:0,vorl:0},
+        {name:'Branko',gespielt:true,tore:0,vorl:0},{name:'Heino',gespielt:false,tore:0,vorl:0},
+        {name:'Walter',gespielt:true,tore:0,vorl:0}
+      ],
+      matches:[
+        {gegner:'1. FFC Fortuna Dresden 2 (Mä)',sf01:12,opp:0},
+        {gegner:'SV Dresden-Neustadt',sf01:2,opp:7},
+        {gegner:'FV Dresden 06 Laubegast 4',sf01:5,opp:4},
+        {gegner:'BSV Lockwitzgrund 2',sf01:2,opp:4}
+      ]
+    },
+    { date:'06.09.2025', venue:'Heimturnier', trikot:'',
+      players:[
+        {name:'Friedi',gespielt:true,tore:3,vorl:0},{name:'Jakob',gespielt:false,tore:0,vorl:0},
+        {name:'Noah',gespielt:true,tore:5,vorl:1},{name:'Luis',gespielt:true,tore:0,vorl:2},
+        {name:'Maximilian',gespielt:true,tore:0,vorl:3},{name:'Nepomuk',gespielt:false,tore:0,vorl:0},
+        {name:'Oskar',gespielt:true,tore:1,vorl:2},{name:'Paul',gespielt:false,tore:0,vorl:0},
+        {name:'Richard',gespielt:false,tore:0,vorl:0},{name:'Friedrich',gespielt:true,tore:0,vorl:0},
+        {name:'Branko',gespielt:true,tore:0,vorl:0},{name:'Heino',gespielt:true,tore:1,vorl:1},
+        {name:'Walter',gespielt:true,tore:0,vorl:0}
+      ],
+      matches:[
+        {gegner:'BSV Lockwitzgrund 2',sf01:4,opp:1},
+        {gegner:'FV B/W Zschachwitz 3',sf01:5,opp:0},
+        {gegner:'SV Dresden-Neustadt',sf01:2,opp:7},
+        {gegner:'SV Helios 24 Dresden 3',sf01:0,opp:8}
+      ]
+    },
+    { date:'26.09.2026', venue:'FV Löbtauer Kickers 3', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'1. FFC Fortuna Dresden 2 (Mä)',sf01:null,opp:null},
+        {gegner:'FV B/W Zschachwitz 3',sf01:null,opp:null},
+        {gegner:'FV Dresden 06 Laubegast 4',sf01:null,opp:null},
+        {gegner:'FV Löbtauer Kickers 3',sf01:null,opp:null}
+      ]
+    },
+    { date:'03.10.2026', venue:'Radeberger SV 2', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'BSV Lockwitzgrund 2',sf01:null,opp:null},
+        {gegner:'FV B/W Zschachwitz 3',sf01:null,opp:null},
+        {gegner:'Radeberger SV 2',sf01:null,opp:null},
+        {gegner:'SC Borea Dresden 5',sf01:null,opp:null}
+      ]
+    },
+    { date:'01.11.2026', venue:'BSV Lockwitzgrund 2', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'BSV Lockwitzgrund 2',sf01:null,opp:null},
+        {gegner:'FV Dresden 06 Laubegast 4',sf01:null,opp:null},
+        {gegner:'Radeberger SV 2',sf01:null,opp:null},
+        {gegner:'SV Dresden-Neustadt',sf01:null,opp:null}
+      ]
+    },
+    { date:'14.11.2026', venue:'FV Dresden 06 Laubegast 4', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'FV B/W Zschachwitz 3',sf01:null,opp:null},
+        {gegner:'FV Dresden 06 Laubegast 4',sf01:null,opp:null},
+        {gegner:'Radeberger SV 2',sf01:null,opp:null},
+        {gegner:'SV Helios 24 Dresden 3',sf01:null,opp:null}
+      ]
+    },
+    { date:'22.11.2026', venue:'FV B/W Zschachwitz 3', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'FV B/W Zschachwitz 3',sf01:null,opp:null},
+        {gegner:'FV Löbtauer Kickers 3',sf01:null,opp:null},
+        {gegner:'Radeberger SV 2',sf01:null,opp:null},
+        {gegner:'SV Dresden-Neustadt',sf01:null,opp:null}
+      ]
+    },
+    { date:'28.11.2026', venue:'FV Löbtauer Kickers 3 (2)', trikot:'', players:mkPlayerStats(PLAYERS_H),
+      matches:[
+        {gegner:'BSV Lockwitzgrund 2',sf01:null,opp:null},
+        {gegner:'FV B/W Zschachwitz 3',sf01:null,opp:null},
+        {gegner:'FV Dresden 06 Laubegast 4',sf01:null,opp:null},
+        {gegner:'Radeberger SV 2',sf01:null,opp:null}
+      ]
+    }
+  ],
+  rueckrunde: []
+};
+
+// ---- State ----
+let DATA;
+let currentRound = 'hinrunde';
+let currentTIdx = 0;
+let showNewTurnierForm = false;
+let statsSort = {col:'scorer', dir:1};
+let tabelleSort = {mode:'football'};
+
+function loadData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    try {
+      DATA = JSON.parse(raw);
+      // migrate: add trikot field if missing
+      ['hinrunde','rueckrunde'].forEach(rnd => {
+        if (DATA[rnd]) DATA[rnd].forEach(t => { if (!('trikot' in t)) t.trikot = ''; });
+      });
+      return;
+    } catch(e) {}
+  }
+  DATA = JSON.parse(JSON.stringify(SEED));
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(DATA));
+  const toast = document.getElementById('save-toast');
+  toast.style.display = 'block';
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => { toast.style.display = 'none'; }, 1800);
+  document.getElementById('last-saved').textContent = 'Gespeichert ' + new Date().toLocaleTimeString('de');
+}
+
+// ---- Eingabe rendering ----
+function renderTurnierPills() {
+  const pills = document.getElementById('turnier-pills');
+  const rnd = DATA[currentRound];
+  pills.innerHTML = '';
+
+  rnd.forEach((t, i) => {
+    const hasData = t.players.some(p => p.gespielt) || t.matches.some(m => m.sf01 !== null);
+    const btn = document.createElement('button');
+    let cls = 'btn t-pill' + (i === currentTIdx ? ' active' : '') + (hasData ? ' has-data' : '');
+    btn.className = cls;
+    let inner = t.date + ' – ' + t.venue;
+    if (t.trikot) inner += ` <span class="trikot-dot" title="Trikots: ${esc(t.trikot)}"></span>`;
+    btn.innerHTML = inner;
+    btn.onclick = () => { currentTIdx = i; showNewTurnierForm = false; renderEingabe(); };
+    pills.appendChild(btn);
+  });
+
+  if (currentRound === 'rueckrunde') {
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn t-pill';
+    addBtn.style.borderStyle = 'dashed';
+    addBtn.innerHTML = '+ Neues Turnier';
+    addBtn.onclick = () => { showNewTurnierForm = !showNewTurnierForm; renderEingabe(); };
+    pills.appendChild(addBtn);
+  }
+}
+
+function renderNewTurnierForm() {
+  const area = document.getElementById('new-turnier-form-area');
+  if (!showNewTurnierForm || currentRound !== 'rueckrunde') { area.innerHTML = ''; return; }
+  area.innerHTML = `
+    <div class="new-turnier-form">
+      <div class="fg"><label>Datum</label><input type="text" id="nf-date" placeholder="z.B. 15.02.2027" style="width:140px"></div>
+      <div class="fg"><label>Austragungsort</label><input type="text" id="nf-venue" placeholder="Vereinsname" style="width:220px"></div>
+      <button class="btn btn-primary btn-sm" id="nf-anlegen">Turnier anlegen</button>
+      <button class="btn btn-ghost btn-sm" id="nf-cancel">Abbrechen</button>
+    </div>`;
+  document.getElementById('nf-anlegen').onclick = () => {
+    const d = document.getElementById('nf-date').value.trim();
+    const v = document.getElementById('nf-venue').value.trim();
+    if (!d || !v) { alert('Bitte Datum und Austragungsort eingeben.'); return; }
+    DATA.rueckrunde.push({ date:d, venue:v, trikot:'', players:mkPlayerStats(PLAYERS_R), matches:[] });
+    currentTIdx = DATA.rueckrunde.length - 1;
+    showNewTurnierForm = false;
+    saveData();
+    renderEingabe();
+  };
+  document.getElementById('nf-cancel').onclick = () => { showNewTurnierForm = false; renderEingabe(); };
+}
+
+function renderTurnierContent() {
+  const cont = document.getElementById('turnier-content');
+  const rnd = DATA[currentRound];
+
+  if (rnd.length === 0) {
+    cont.innerHTML = '<div class="empty-note">Noch keine Turniere geplant. Mit „+ Neues Turnier" ein Turnier anlegen.</div>';
+    return;
+  }
+  if (currentTIdx >= rnd.length) currentTIdx = 0;
+
+  const t = rnd[currentTIdx];
+
+  cont.innerHTML = `
+    <div class="card">
+      <div class="trikot-row">
+        <label>${JERSEY} Trikotwäsche:</label>
+        <select id="trikot-select">
+          <option value="">– noch offen –</option>
+          ${ALL_PLAYERS.map(p => `<option value="${esc(p)}" ${t.trikot===p?'selected':''}>${esc(p)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="card-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Spieler
+      </div>
+      <div style="padding:0;overflow-x:auto">
+        <table>
+          <thead><tr><th>Spieler</th><th>Gespielt</th><th>Tore</th><th>Vorlagen</th></tr></thead>
+          <tbody id="player-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Spielergebnisse
+        ${currentRound === 'rueckrunde' ? `<button class="btn btn-danger btn-sm" id="del-turnier" style="margin-left:auto">Turnier löschen</button>` : ''}
+      </div>
+      <div class="card-body">
+        <div id="matches-container"></div>
+        <button class="btn btn-add btn-sm" id="add-match-btn" style="margin-top:8px">+ Spiel hinzufügen</button>
+      </div>
+    </div>`;
+
+  // trikot select
+  document.getElementById('trikot-select').onchange = function() {
+    DATA[currentRound][currentTIdx].trikot = this.value;
+    saveData();
+    renderTurnierPills();
+  };
+
+  // delete tournament (Rückrunde only)
+  const delBtn = document.getElementById('del-turnier');
+  if (delBtn) delBtn.onclick = () => {
+    if (!confirm('Turnier „' + t.date + ' – ' + t.venue + '" wirklich löschen?')) return;
+    DATA.rueckrunde.splice(currentTIdx, 1);
+    currentTIdx = Math.max(0, currentTIdx - 1);
+    saveData();
+    renderEingabe();
+  };
+
+  renderPlayerTable();
+  renderMatches();
+
+  document.getElementById('add-match-btn').onclick = () => {
+    DATA[currentRound][currentTIdx].matches.push({gegner:'', sf01:null, opp:null});
+    renderMatches();
+  };
+}
+
+function renderPlayerTable() {
+  const t = DATA[currentRound][currentTIdx];
+  const tbody = document.getElementById('player-tbody');
+  tbody.innerHTML = '';
+  t.players.forEach((p, pi) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${p.name}</td>
+      <td><input type="checkbox" ${p.gespielt?'checked':''} data-pi="${pi}"></td>
+      <td><input type="number" min="0" max="20" value="${p.tore||0}" data-pi="${pi}" data-field="tore" ${p.gespielt?'':'disabled'}></td>
+      <td><input type="number" min="0" max="20" value="${p.vorl||0}" data-pi="${pi}" data-field="vorl" ${p.gespielt?'':'disabled'}></td>`;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.onchange = () => {
+      const pi = +cb.dataset.pi;
+      DATA[currentRound][currentTIdx].players[pi].gespielt = cb.checked;
+      const row = cb.closest('tr');
+      row.querySelectorAll('input[type=number]').forEach(n => n.disabled = !cb.checked);
+      if (!cb.checked) {
+        DATA[currentRound][currentTIdx].players[pi].tore = 0;
+        DATA[currentRound][currentTIdx].players[pi].vorl = 0;
+        row.querySelectorAll('input[type=number]').forEach(n => n.value = 0);
+      }
+      saveData();
+    };
+  });
+  tbody.querySelectorAll('input[type=number]').forEach(inp => {
+    inp.oninput = () => {
+      DATA[currentRound][currentTIdx].players[+inp.dataset.pi][inp.dataset.field] = parseInt(inp.value)||0;
+      saveData();
+    };
+  });
+}
+
+function renderMatches() {
+  const t = DATA[currentRound][currentTIdx];
+  const cont = document.getElementById('matches-container');
+  cont.innerHTML = '';
+  t.matches.forEach((m, mi) => {
+    const row = document.createElement('div');
+    row.className = 'result-row';
+    row.innerHTML = `
+      <input type="text" class="opp-name" placeholder="Gegner" value="${esc(m.gegner||'')}" data-mi="${mi}">
+      <input type="number" min="0" max="30" placeholder="SF01" value="${m.sf01??''}" data-mi="${mi}" data-field="sf01" style="width:55px">
+      <span class="score-sep">:</span>
+      <input type="number" min="0" max="30" placeholder="Gegner" value="${m.opp??''}" data-mi="${mi}" data-field="opp" style="width:55px">
+      <button class="btn btn-danger btn-sm" data-mi="${mi}">✕</button>`;
+    cont.appendChild(row);
+  });
+
+  cont.querySelectorAll('input[type=text]').forEach(inp => {
+    inp.oninput = () => { DATA[currentRound][currentTIdx].matches[+inp.dataset.mi].gegner = inp.value; saveData(); };
+  });
+  cont.querySelectorAll('input[type=number]').forEach(inp => {
+    inp.oninput = () => {
+      const v = inp.value === '' ? null : parseInt(inp.value);
+      DATA[currentRound][currentTIdx].matches[+inp.dataset.mi][inp.dataset.field] = v;
+      saveData();
+    };
+  });
+  cont.querySelectorAll('.btn-danger').forEach(btn => {
+    btn.onclick = () => {
+      DATA[currentRound][currentTIdx].matches.splice(+btn.dataset.mi, 1);
+      renderMatches(); saveData();
+    };
+  });
+}
+
+function renderEingabe() {
+  renderTurnierPills();
+  renderNewTurnierForm();
+  renderTurnierContent();
+}
+
+// ---- Podeste ----
+function renderPodeste() {
+  const all = buildStats();
+  const cats = [
+    { title:'⚽ Bester Torschütze', key:'tore',     unit:'Tore' },
+    { title:'🎯 Bester Vorlagengeber', key:'vorlagen', unit:'Vorlagen' },
+    { title:'⭐ Bester Scorer',     key:'scorer',   unit:'Punkte' }
+  ];
+  const grid = document.getElementById('podeste');
+  grid.innerHTML = '';
+
+  cats.forEach(cat => {
+    const sorted = all.filter(r => r[cat.key] > 0)
+      .sort((a,b) => b[cat.key] - a[cat.key]);
+    // podium order: 2nd left, 1st center, 3rd right
+    const slots = [sorted[1], sorted[0], sorted[2]];
+    const ranks = [2, 1, 3];
+
+    const card = document.createElement('div');
+    card.className = 'podest-card';
+    card.innerHTML = `<div class="podest-title">${cat.title}</div><div class="podest"></div>`;
+    const podest = card.querySelector('.podest');
+
+    slots.forEach((player, si) => {
+      const rank = ranks[si];
+      const div = document.createElement('div');
+      div.className = 'podest-slot';
+      if (!player) { div.style.visibility = 'hidden'; div.innerHTML = `<div class="podest-name">&nbsp;</div><div class="podest-val">&nbsp;</div><div class="podest-bar r${rank}">${rank}</div>`; }
+      else {
+        div.innerHTML = `
+          <div class="podest-name">${esc(player.name)}</div>
+          <div class="podest-val">${player[cat.key]}</div>
+          <div class="podest-bar r${rank}">${rank}</div>`;
+      }
+      podest.appendChild(div);
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ---- Statistik ----
+function buildStats() {
+  const map = {};
+  ['hinrunde','rueckrunde'].forEach(rnd => {
+    const sfx = rnd === 'hinrunde' ? '_h' : '_r';
+    DATA[rnd].forEach(t => {
+      t.players.forEach(p => {
+        if (!map[p.name]) map[p.name] = {name:p.name, spiele_h:0,tore_h:0,vorl_h:0, spiele_r:0,tore_r:0,vorl_r:0};
+        if (p.gespielt) {
+          map[p.name]['spiele'+sfx]++;
+          map[p.name]['tore'+sfx]  += p.tore||0;
+          map[p.name]['vorl'+sfx]  += p.vorl||0;
+        }
+      });
+    });
+  });
+  return Object.values(map).map(k => ({
+    ...k,
+    spiele: k.spiele_h + k.spiele_r,
+    tore:   k.tore_h   + k.tore_r,
+    vorlagen: k.vorl_h + k.vorl_r,
+    scorer: k.tore_h + k.tore_r + k.vorl_h + k.vorl_r
+  }));
+}
+
+function renderStatistik() {
+  renderPodeste();
+  const rows = buildStats();
+  rows.sort((a,b) => {
+    const va = a[statsSort.col], vb = b[statsSort.col];
+    if (typeof va === 'string') return statsSort.dir * va.localeCompare(vb, 'de');
+    return statsSort.dir * ((vb||0) - (va||0));
+  });
+  const tbody = document.getElementById('stats-tbody');
+  tbody.innerHTML = '';
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.name}</td>
+      <td class="stat-number ${r.spiele>0?'highlight':''}">${r.spiele}</td>
+      <td class="stat-number ${r.tore>0?'highlight':''}">${r.tore}</td>
+      <td class="stat-number">${r.vorlagen}</td>
+      <td class="stat-number ${r.scorer>0?'highlight':''}">${r.scorer}</td>
+      <td class="stat-number group-sep">${r.spiele_h}</td>
+      <td class="stat-number">${r.tore_h}</td>
+      <td class="stat-number">${r.vorl_h}</td>
+      <td class="stat-number group-sep">${r.spiele_r}</td>
+      <td class="stat-number">${r.tore_r}</td>
+      <td class="stat-number">${r.vorl_r}</td>`;
+    tbody.appendChild(tr);
+  });
+  document.querySelectorAll('#stats-table th.sortable').forEach(th => {
+    th.classList.toggle('sort-active', th.dataset.col === statsSort.col);
+  });
+}
+
+// ---- Tabelle ----
+function buildTabelle() {
+  const map = {};
+  ['hinrunde','rueckrunde'].forEach(rnd => {
+    DATA[rnd].forEach(t => {
+      t.matches.forEach(m => {
+        if (!m.gegner) return;
+        if (!map[m.gegner]) map[m.gegner] = {gegner:m.gegner,spiele:0,s:0,u:0,n:0,tf:0,tg:0};
+        if (m.sf01 === null || m.opp === null) return;
+        const k = map[m.gegner];
+        k.spiele++; k.tf += m.sf01; k.tg += m.opp;
+        if (m.sf01 > m.opp) k.s++;
+        else if (m.sf01 === m.opp) k.u++;
+        else k.n++;
+      });
+    });
+  });
+  return Object.values(map).map(k => ({...k, diff:k.tf-k.tg, pts:3*k.s+k.u}));
+}
+
+function footballSort(a, b) {
+  // S desc → U desc → N asc → Diff desc → T+ desc → name asc
+  if (b.s !== a.s) return b.s - a.s;
+  if (b.u !== a.u) return b.u - a.u;
+  if (a.n !== b.n) return a.n - b.n;
+  if (b.diff !== a.diff) return b.diff - a.diff;
+  if (b.tf !== a.tf) return b.tf - a.tf;
+  return a.gegner.localeCompare(b.gegner, 'de');
+}
+
+function renderTabelle() {
+  const rows = buildTabelle();
+
+  if (tabelleSort.mode === 'football') {
+    rows.sort(footballSort);
+  } else {
+    rows.sort((a,b) => {
+      const va = a[tabelleSort.col], vb = b[tabelleSort.col];
+      if (typeof va === 'string') return tabelleSort.dir * va.localeCompare(vb, 'de');
+      return tabelleSort.dir * ((vb||0) - (va||0));
+    });
+  }
+
+  const tbody = document.getElementById('tabelle-tbody');
+  tbody.innerHTML = '';
+  rows.forEach((r, idx) => {
+    const tr = document.createElement('tr');
+    let cls = '';
+    if (r.spiele > 0) {
+      if (r.s / r.spiele >= .6) cls = 'sf01-win';
+      else if (r.n / r.spiele >= .6) cls = 'sf01-loss';
+    }
+    tr.className = cls;
+    const diffStr = r.diff > 0 ? '+' + r.diff : String(r.diff);
+    tr.innerHTML = `
+      <td>${r.gegner}</td>
+      <td class="stat-number highlight">${r.pts}</td>
+      <td class="stat-number">${r.spiele}</td>
+      <td class="stat-number"><span class="badge badge-w">${r.s}</span></td>
+      <td class="stat-number"><span class="badge badge-d">${r.u}</span></td>
+      <td class="stat-number"><span class="badge badge-l">${r.n}</span></td>
+      <td class="stat-number highlight">${r.tf}</td>
+      <td class="stat-number">${r.tg}</td>
+      <td class="stat-number"><b>${diffStr}</b></td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Highlight active sort column header
+  document.querySelectorAll('#tabelle-table th.sortable').forEach(th => {
+    th.classList.toggle('sort-active',
+      tabelleSort.mode === 'football' ? th.dataset.col === 's' :
+      th.dataset.col === tabelleSort.col);
+  });
+
+  // Results by tournament
+  const rtbody = document.getElementById('results-tbody');
+  rtbody.innerHTML = '';
+  ['hinrunde','rueckrunde'].forEach(rnd => {
+    DATA[rnd].forEach(t => {
+      t.matches.forEach(m => {
+        if (!m.gegner) return;
+        const tr = document.createElement('tr');
+        const hasScore = m.sf01 !== null && m.opp !== null;
+        let result = '–', cls = '';
+        if (hasScore) {
+          if (m.sf01 > m.opp)      { result = `<span class="badge badge-w">S</span>`; cls='sf01-win'; }
+          else if (m.sf01 === m.opp){ result = `<span class="badge badge-d">U</span>`; cls='sf01-draw'; }
+          else                      { result = `<span class="badge badge-l">N</span>`; cls='sf01-loss'; }
+        }
+        tr.className = cls;
+        tr.innerHTML = `
+          <td>${rnd==='hinrunde'?'Hinrunde':'Rückrunde'}</td>
+          <td>${t.date}</td>
+          <td>${t.venue}</td>
+          <td>${m.gegner}</td>
+          <td class="stat-number">${m.sf01??'–'}</td>
+          <td class="stat-number">${m.opp??'–'}</td>
+          <td>${result}</td>`;
+        rtbody.appendChild(tr);
+      });
+    });
+  });
+}
+
+// ---- Trikots tab ----
+function renderTrikots() {
+  const tbody = document.getElementById('trikots-tbody');
+  tbody.innerHTML = '';
+  ['hinrunde','rueckrunde'].forEach(rnd => {
+    DATA[rnd].forEach(t => {
+      const tr = document.createElement('tr');
+      const hasData = t.players.some(p => p.gespielt) || t.matches.some(m => m.sf01 !== null);
+      tr.innerHTML = `
+        <td>${rnd==='hinrunde'?'Hinrunde':'Rückrunde'}</td>
+        <td>${t.date}</td>
+        <td>${t.venue}</td>
+        <td style="${t.trikot?'color:#276749;font-weight:600':'color:#a0aec0'}">${t.trikot?JERSEY+' '+t.trikot:'– noch offen –'}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+// ---- Turnierübersicht (read-only) ----
+function renderTurnierUebersicht() {
+  const container = document.getElementById('uebersicht-container');
+  container.innerHTML = '';
+  let any = false;
+
+  ['hinrunde','rueckrunde'].forEach(rnd => {
+    DATA[rnd].forEach(t => {
+      any = true;
+      const hasMatches = t.matches.some(m => m.gegner);
+      const hasPlayers = t.players.some(p => p.gespielt);
+
+      // matches
+      let matchesHtml = '';
+      if (hasMatches) {
+        const rows = t.matches.filter(m => m.gegner).map(m => {
+          const hasScore = m.sf01 !== null && m.opp !== null;
+          let badge = '';
+          if (hasScore) {
+            if (m.sf01 > m.opp)       badge = `<span class="badge badge-w">S</span>`;
+            else if (m.sf01 === m.opp) badge = `<span class="badge badge-d">U</span>`;
+            else                       badge = `<span class="badge badge-l">N</span>`;
+          }
+          return `<tr>
+            <td style="padding:3px 8px">${esc(m.gegner)}</td>
+            <td style="padding:3px 8px;text-align:center;font-weight:600">${hasScore ? m.sf01+' : '+m.opp : '–'}</td>
+            <td style="padding:3px 8px;text-align:center">${badge}</td>
+          </tr>`;
+        }).join('');
+        matchesHtml = `<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;table-layout:fixed">
+          <colgroup><col><col style="width:72px"><col style="width:36px"></colgroup>
+          <thead><tr style="color:#777;font-size:11px">
+            <th style="text-align:left;padding:3px 8px;font-weight:500">Gegner</th>
+            <th style="text-align:center;padding:3px 8px;font-weight:500">Ergebnis</th>
+            <th></th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+      } else {
+        matchesHtml = `<p style="color:#a0aec0;font-size:12px;margin-top:8px;font-style:italic">Noch keine Ergebnisse eingetragen</p>`;
+      }
+
+      // players
+      let playersHtml = '';
+      if (hasPlayers) {
+        const pills = t.players.filter(p => p.gespielt).map(p => {
+          const parts = [];
+          if (p.tore) parts.push(p.tore + ' T');
+          if (p.vorl) parts.push(p.vorl + ' V');
+          const detail = parts.length ? `<span style="color:#dc2626;font-weight:600;margin-left:5px">${parts.join(', ')}</span>` : '';
+          return `<span style="display:inline-flex;align-items:center;background:#f2f2f2;border-radius:20px;padding:2px 9px;font-size:11px;margin:2px 2px">${esc(p.name)}${detail}</span>`;
+        }).join('');
+        playersHtml = `<div style="margin-top:10px;line-height:2">${pills}</div>`;
+      }
+
+      // trikot
+      const trikotHtml = t.trikot
+        ? `<span style="margin-left:auto;font-size:11px;color:#666">${JERSEY}&nbsp;${esc(t.trikot)}</span>` : '';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-header">
+          <span style="color:#888;font-weight:400;font-size:11px">${rnd==='hinrunde'?'Hinrunde':'Rückrunde'}</span>
+          <span style="color:#ccc;margin:0 6px">·</span>
+          <span>${esc(t.date)}</span>
+          <span style="color:#ccc;margin:0 6px">·</span>
+          <span>${esc(t.venue)}</span>
+          ${trikotHtml}
+        </div>
+        <div class="card-body">${matchesHtml}${playersHtml}</div>`;
+      container.appendChild(card);
+    });
+  });
+
+  if (!any) {
+    container.innerHTML = '<p style="color:#a0aec0;font-size:13px;font-style:italic">Noch keine Turnierdaten vorhanden.</p>';
+  }
+}
+
+// ---- Helpers ----
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+// ---- Tab switching ----
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tab-btn,.tab-content').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    const t = btn.dataset.tab;
+    if (t === 'statistik')  renderStatistik();
+    if (t === 'tabelle')    renderTabelle();
+    if (t === 'trikots')    renderTrikots();
+    if (t === 'uebersicht') renderTurnierUebersicht();
+  };
+});
+
+// ---- Round switch ----
+document.querySelectorAll('.round-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.round-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRound = btn.dataset.round;
+    currentTIdx = 0;
+    showNewTurnierForm = false;
+    renderEingabe();
+  };
+});
+
+// ---- Stats table sort ----
+document.querySelectorAll('#stats-table th.sortable').forEach(th => {
+  th.onclick = () => {
+    const col = th.dataset.col;
+    if (statsSort.col === col) statsSort.dir *= -1;
+    else { statsSort.col = col; statsSort.dir = col==='name' ? 1 : 1; }
+    renderStatistik();
+  };
+});
+
+// ---- Tabelle sort ----
+document.querySelectorAll('#tabelle-table th.sortable').forEach(th => {
+  th.onclick = () => {
+    const col = th.dataset.col;
+    if (tabelleSort.mode === 'column' && tabelleSort.col === col) tabelleSort.dir *= -1;
+    else { tabelleSort = {mode:'column', col, dir: col==='gegner' ? 1 : -1}; }
+    renderTabelle();
+  };
+});
+document.getElementById('tabelle-reset-sort').onclick = () => {
+  tabelleSort = {mode:'football'};
+  renderTabelle();
+};
+
+// ---- PIN / Edit Mode ----
+const EDIT_PIN = '1605';
+let editMode = false;
+
+function checkEditMode() {
+  editMode = localStorage.getItem('e2_edit') === EDIT_PIN;
+}
+
+function applyEditMode() {
+  const enterBtn = document.querySelector('.tab-btn[data-tab="eingabe"]');
+  if (enterBtn) enterBtn.style.display = editMode ? '' : 'none';
+
+  const lockBtn = document.getElementById('lock-btn');
+  if (lockBtn) {
+    lockBtn.textContent = editMode ? '🔓' : '🔒';
+    lockBtn.title = editMode ? 'Wartungsmodus beenden' : 'Wartungsmodus';
+  }
+
+  const lastSaved = document.getElementById('last-saved');
+  if (lastSaved) lastSaved.style.visibility = editMode ? 'visible' : 'hidden';
+
+  // If active tab becomes hidden, switch to Turnierübersicht
+  const activeBtn = document.querySelector('.tab-btn.active');
+  if (activeBtn && activeBtn.dataset.tab === 'eingabe' && !editMode) {
+    document.querySelectorAll('.tab-btn,.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelector('.tab-btn[data-tab="uebersicht"]').classList.add('active');
+    document.getElementById('tab-uebersicht').classList.add('active');
+    renderTurnierUebersicht();
+  }
+}
+
+function showPinDialog() {
+  if (editMode) {
+    localStorage.removeItem('e2_edit');
+    editMode = false;
+    applyEditMode();
+    return;
+  }
+  const pin = prompt('PIN:');
+  if (pin === null) return;
+  if (pin === EDIT_PIN) {
+    localStorage.setItem('e2_edit', EDIT_PIN);
+    editMode = true;
+    applyEditMode();
+  } else {
+    alert('Falscher PIN.');
+  }
+}
+
+// ---- Init ----
+loadData();
+checkEditMode();
+applyEditMode();
+if (editMode) renderEingabe();
+else renderTurnierUebersicht();
+</script>
+</body>
+</html>

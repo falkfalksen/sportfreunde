@@ -724,19 +724,24 @@ function renderTabelle() {
   // Results by tournament
   const rtbody = document.getElementById('results-tbody');
   rtbody.innerHTML = '';
+  let tIdx = 0;
   ['hinrunde','rueckrunde'].forEach(rnd => {
     DATA[rnd].forEach(t => {
-      t.matches.forEach(m => {
+      const bg = tIdx % 2 === 1 ? '#f7f7f7' : '#fff';
+      const isFirst = true;
+      t.matches.forEach((m, mi) => {
         if (!m.gegner) return;
         const tr = document.createElement('tr');
         const hasScore = m.sf01 !== null && m.opp !== null;
         let result = '–', cls = '';
         if (hasScore) {
-          if (m.sf01 > m.opp)      { result = `<span class="badge badge-w">S</span>`; cls='sf01-win'; }
-          else if (m.sf01 === m.opp){ result = `<span class="badge badge-d">U</span>`; cls='sf01-draw'; }
-          else                      { result = `<span class="badge badge-l">N</span>`; cls='sf01-loss'; }
+          if (m.sf01 > m.opp)       { result = `<span class="badge badge-w">S</span>`; cls='sf01-win'; }
+          else if (m.sf01 === m.opp) { result = `<span class="badge badge-d">U</span>`; cls='sf01-draw'; }
+          else                       { result = `<span class="badge badge-l">N</span>`; cls='sf01-loss'; }
         }
         tr.className = cls;
+        tr.style.background = bg;
+        if (mi === 0) tr.style.borderTop = '2px solid #ddd';
         tr.innerHTML = `
           <td>${rnd==='hinrunde'?'Hinrunde':'Rückrunde'}</td>
           <td>${t.date}</td>
@@ -747,6 +752,7 @@ function renderTabelle() {
           <td>${result}</td>`;
         rtbody.appendChild(tr);
       });
+      tIdx++;
     });
   });
 }

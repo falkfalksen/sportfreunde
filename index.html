@@ -107,6 +107,7 @@ tr.sf01-loss td{background:#fff5f5}
   <div id="header-right">
     <button id="export-btn" onclick="exportDataJson()" title="Daten als data.json speichern">⬇ Exportieren</button>
     <span id="last-saved"></span>
+    <span id="last-export"></span>
   </div>
 </header>
 
@@ -957,6 +958,7 @@ async function exportDataJson() {
     a.href = 'data:application/json,' + encodeURIComponent(json);
     a.download = 'data.json';
     a.click();
+    updateExportTimestamp();
     showExportToast('data.json heruntergeladen');
     return;
   }
@@ -980,6 +982,7 @@ async function exportDataJson() {
     const writable = await handle.createWritable();
     await writable.write(json);
     await writable.close();
+    updateExportTimestamp();
     showExportToast('data.json gespeichert ✓');
   } catch(e) {
     if (e.name !== 'AbortError') alert('Fehler: ' + e.message);
@@ -991,6 +994,11 @@ function showExportToast(msg) {
   t.style.display = 'block';
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.style.display = 'none', 2500);
+}
+function updateExportTimestamp() {
+  const ts = 'Exportiert ' + new Date().toLocaleTimeString('de');
+  localStorage.setItem('e2_last_export', ts);
+  document.getElementById('last-export').textContent = ts;
 }
 
 // ---- PIN / Edit Mode ----
@@ -1013,6 +1021,9 @@ function applyEditMode() {
 
   const lastSaved = document.getElementById('last-saved');
   if (lastSaved) lastSaved.style.visibility = editMode ? 'visible' : 'hidden';
+
+  const lastExport = document.getElementById('last-export');
+  if (lastExport) lastExport.style.visibility = editMode ? 'visible' : 'hidden';
 
   const exportBtn = document.getElementById('export-btn');
   if (exportBtn) exportBtn.style.display = editMode ? 'block' : 'none';
@@ -1049,6 +1060,8 @@ function showPinDialog() {
 loadData();
 checkEditMode();
 applyEditMode();
+const _lastExport = localStorage.getItem('e2_last_export');
+if (_lastExport) document.getElementById('last-export').textContent = _lastExport;
 if (editMode) renderEingabe();
 else renderTurnierUebersicht();
 </script>

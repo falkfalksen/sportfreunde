@@ -63,6 +63,10 @@ tr.sf01-loss td{background:#fff5f5}
 .stat-number{text-align:right;font-variant-numeric:tabular-nums}
 .highlight{font-weight:700;color:#dc2626}
 #save-toast{position:fixed;bottom:20px;right:20px;background:#111;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;display:none;animation:fadein .3s}
+#export-toast{position:fixed;bottom:20px;left:20px;background:#166534;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;display:none;animation:fadein .3s}
+#header-right{position:absolute;right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+#export-btn{background:#dc2626;color:#fff;border:none;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;font-weight:600;display:none}
+#export-btn:hover{background:#b91c1c}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .round-switch{display:flex;border:1px solid #ccc;border-radius:6px;overflow:hidden}
 .round-btn{padding:6px 16px;background:#fff;border:none;cursor:pointer;font-size:13px;color:#555;transition:background .1s}
@@ -100,7 +104,10 @@ tr.sf01-loss td{background:#fff5f5}
   <h1>E2-Jugend</h1>
   <img src="Sportfreunde_logo.jpg" alt="SF01 Logo">
   <h1>2026/2027</h1>
-  <span id="last-saved"></span>
+  <div id="header-right">
+    <button id="export-btn" onclick="exportDataJson()" title="Daten als data.json speichern">⬇ Exportieren</button>
+    <span id="last-saved"></span>
+  </div>
 </header>
 
 <div class="tabs">
@@ -221,6 +228,7 @@ tr.sf01-loss td{background:#fff5f5}
 </div>
 
 <div id="save-toast">Gespeichert ✓</div>
+<div id="export-toast"></div>
 
 <script>
 const JERSEY = `<svg width="13" height="13" viewBox="0 0 24 24" style="vertical-align:middle"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg>`;
@@ -910,6 +918,81 @@ document.getElementById('tabelle-reset-sort').onclick = () => {
   renderTabelle();
 };
 
+// ---- Data Export ----
+function openIDB() {
+  return new Promise((res, rej) => {
+    const req = indexedDB.open('sf01_fs', 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('handles');
+    req.onsuccess = e => res(e.target.result);
+    req.onerror = () => rej(req.error);
+  });
+}
+async function getStoredHandle() {
+  try {
+    const db = await openIDB();
+    return new Promise(res => {
+      const tx = db.transaction('handles', 'readonly');
+      const g = tx.objectStore('handles').get('dataJson');
+      g.onsuccess = () => res(g.result || null);
+      g.onerror  = () => res(null);
+    });
+  } catch { return null; }
+}
+async function storeHandle(handle) {
+  try {
+    const db = await openIDB();
+    await new Promise(res => {
+      const tx = db.transaction('handles', 'readwrite');
+      tx.objectStore('handles').put(handle, 'dataJson');
+      tx.oncomplete = res;
+    });
+  } catch {}
+}
+async function exportDataJson() {
+  const json = JSON.stringify(DATA, null, 2);
+
+  if (!window.showSaveFilePicker) {
+    // Fallback für Browser ohne File System Access API
+    const a = document.createElement('a');
+    a.href = 'data:application/json,' + encodeURIComponent(json);
+    a.download = 'data.json';
+    a.click();
+    showExportToast('data.json heruntergeladen');
+    return;
+  }
+
+  try {
+    let handle = await getStoredHandle();
+    if (handle) {
+      const perm = await handle.queryPermission({mode:'readwrite'});
+      if (perm !== 'granted') {
+        const req = await handle.requestPermission({mode:'readwrite'});
+        if (req !== 'granted') handle = null;
+      }
+    }
+    if (!handle) {
+      handle = await window.showSaveFilePicker({
+        suggestedName: 'data.json',
+        types: [{ description: 'JSON', accept: {'application/json': ['.json']} }]
+      });
+      await storeHandle(handle);
+    }
+    const writable = await handle.createWritable();
+    await writable.write(json);
+    await writable.close();
+    showExportToast('data.json gespeichert ✓');
+  } catch(e) {
+    if (e.name !== 'AbortError') alert('Fehler: ' + e.message);
+  }
+}
+function showExportToast(msg) {
+  const t = document.getElementById('export-toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.style.display = 'none', 2500);
+}
+
 // ---- PIN / Edit Mode ----
 const EDIT_PIN = '1605';
 let editMode = false;
@@ -930,6 +1013,9 @@ function applyEditMode() {
 
   const lastSaved = document.getElementById('last-saved');
   if (lastSaved) lastSaved.style.visibility = editMode ? 'visible' : 'hidden';
+
+  const exportBtn = document.getElementById('export-btn');
+  if (exportBtn) exportBtn.style.display = editMode ? 'block' : 'none';
 
   // If active tab becomes hidden, switch to Turnierübersicht
   const activeBtn = document.querySelector('.tab-btn.active');

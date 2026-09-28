@@ -12,6 +12,7 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:'72','72full',Arial,Helvetica,sans-serif}
 body{font-family:'72','72full',Arial,Helvetica,sans-serif;background:#f2f2f2;color:#1a1a1a;font-size:14px}
 header{background:#fff;color:#111;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;min-height:56px;border-bottom:3px solid #dc2626}
+#sticky-top{position:sticky;top:0;z-index:200}
 header img{height:40px;width:auto;object-fit:contain}
 header h1{font-size:17px;font-weight:600;letter-spacing:.02em}
 header span{font-size:11px;opacity:.45;color:#111}
@@ -99,6 +100,7 @@ tr.sf01-loss td{background:#fff5f5}
 </head>
 <body>
 
+<div id="sticky-top">
 <header>
   <button id="lock-btn" onclick="showPinDialog()" title="Wartungsmodus">🔒</button>
   <h1>E2-Jugend</h1>
@@ -117,6 +119,7 @@ tr.sf01-loss td{background:#fff5f5}
   <button class="tab-btn" data-tab="statistik">Spielerstatistik</button>
   <button class="tab-btn" data-tab="tabelle">Tabelle</button>
   <button class="tab-btn" data-tab="trikots"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg>Trikotwäsche</button>
+</div>
 </div>
 
 <!-- EINGABE -->

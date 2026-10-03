@@ -1,0 +1,861 @@
+{
+  "hinrunde": [
+    {
+      "date": "29.08.2026",
+      "venue": "SV Dresden-Neustadt",
+      "trikot": "Maximilian",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": true,
+          "tore": 4,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 0
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": true,
+          "tore": 6,
+          "vorl": 0
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": true,
+          "tore": 4,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "1. FFC Fortuna Dresden 2 (Mä)",
+          "sf01": 12,
+          "opp": 0
+        },
+        {
+          "gegner": "SV Dresden-Neustadt",
+          "sf01": 2,
+          "opp": 7
+        },
+        {
+          "gegner": "FV Dresden 06 Laubegast 4",
+          "sf01": 5,
+          "opp": 4
+        },
+        {
+          "gegner": "BSV Lockwitzgrund 2",
+          "sf01": 2,
+          "opp": 4
+        }
+      ]
+    },
+    {
+      "date": "06.09.2025",
+      "venue": "Heimturnier",
+      "trikot": "Noah",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": true,
+          "tore": 3,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": true,
+          "tore": 5,
+          "vorl": 1
+        },
+        {
+          "name": "Luis",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 2
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 3
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 2
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 1
+        },
+        {
+          "name": "Walter",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "BSV Lockwitzgrund 2",
+          "sf01": 4,
+          "opp": 1
+        },
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": 5,
+          "opp": 0
+        },
+        {
+          "gegner": "SV Dresden-Neustadt",
+          "sf01": 2,
+          "opp": 7
+        },
+        {
+          "gegner": "SV Helios 24 Dresden 3",
+          "sf01": 0,
+          "opp": 8
+        }
+      ]
+    },
+    {
+      "date": "26.09.2026",
+      "venue": "FV Löbtauer Kickers 3",
+      "trikot": "Heino",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": true,
+          "tore": 3,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 3
+        },
+        {
+          "name": "Noah",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 2
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": true,
+          "tore": 3,
+          "vorl": 4
+        },
+        {
+          "name": "Oskar",
+          "gespielt": true,
+          "tore": 6,
+          "vorl": 4
+        },
+        {
+          "name": "Paul",
+          "gespielt": true,
+          "tore": 5,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 3
+        },
+        {
+          "name": "Walter",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 3
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "1. FFC Fortuna Dresden 2 (Mä)",
+          "sf01": 9,
+          "opp": 1
+        },
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": 1,
+          "opp": 4
+        },
+        {
+          "gegner": "FV Dresden 06 Laubegast 4",
+          "sf01": 5,
+          "opp": 3
+        },
+        {
+          "gegner": "FV Löbtauer Kickers 3",
+          "sf01": 5,
+          "opp": 1
+        }
+      ]
+    },
+    {
+      "date": "03.10.2026",
+      "venue": "Radeberger SV 2",
+      "trikot": "Paul",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": true,
+          "tore": 4,
+          "vorl": 2
+        },
+        {
+          "name": "Luis",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 1
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 1
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": true,
+          "tore": 5,
+          "vorl": 5
+        },
+        {
+          "name": "Paul",
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 3
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 1
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "BSV Lockwitzgrund 2",
+          "sf01": 6,
+          "opp": 2
+        },
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": 4,
+          "opp": 0
+        },
+        {
+          "gegner": "Radeberger SV 2",
+          "sf01": 4,
+          "opp": 2
+        },
+        {
+          "gegner": "SC Borea Dresden 5",
+          "sf01": 2,
+          "opp": 2
+        }
+      ]
+    },
+    {
+      "date": "01.11.2026",
+      "venue": "BSV Lockwitzgrund 2",
+      "trikot": "",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "BSV Lockwitzgrund 2",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "FV Dresden 06 Laubegast 4",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "Radeberger SV 2",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "SV Dresden-Neustadt",
+          "sf01": null,
+          "opp": null
+        }
+      ]
+    },
+    {
+      "date": "14.11.2026",
+      "venue": "FV Dresden 06 Laubegast 4",
+      "trikot": "",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "FV Dresden 06 Laubegast 4",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "Radeberger SV 2",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "SV Helios 24 Dresden 3",
+          "sf01": null,
+          "opp": null
+        }
+      ]
+    },
+    {
+      "date": "22.11.2026",
+      "venue": "FV B/W Zschachwitz 3",
+      "trikot": "",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "FV Löbtauer Kickers 3",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "Radeberger SV 2",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "SV Dresden-Neustadt",
+          "sf01": null,
+          "opp": null
+        }
+      ]
+    },
+    {
+      "date": "28.11.2026",
+      "venue": "FV Löbtauer Kickers 3 (2)",
+      "trikot": "",
+      "players": [
+        {
+          "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Jakob",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Noah",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Luis",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Maximilian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Nepomuk",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Oskar",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Paul",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Richard",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Friedrich",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Branko",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Heino",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Walter",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        }
+      ],
+      "matches": [
+        {
+          "gegner": "BSV Lockwitzgrund 2",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "FV B/W Zschachwitz 3",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "FV Dresden 06 Laubegast 4",
+          "sf01": null,
+          "opp": null
+        },
+        {
+          "gegner": "Radeberger SV 2",
+          "sf01": null,
+          "opp": null
+        }
+      ]
+    }
+  ],
+  "rueckrunde": []
+}

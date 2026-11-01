@@ -471,7 +471,7 @@
         },
         {
           "name": "Maximilian",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         },
@@ -507,7 +507,7 @@
         },
         {
           "name": "Branko",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         },
@@ -519,7 +519,7 @@
         },
         {
           "name": "Walter",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         }

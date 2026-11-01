@@ -453,9 +453,9 @@
         },
         {
           "name": "Jakob",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "gespielt": true,
+          "tore": 1,
+          "vorl": 4
         },
         {
           "name": "Noah",
@@ -465,8 +465,8 @@
         },
         {
           "name": "Luis",
-          "gespielt": false,
-          "tore": 0,
+          "gespielt": true,
+          "tore": 1,
           "vorl": 0
         },
         {

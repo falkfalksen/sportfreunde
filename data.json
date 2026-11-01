@@ -450,12 +450,12 @@
           "gespielt": true,
           "tore": 7,
           "vorl": 4
-        },        
+        },
         {
           "name": "Jakob",
           "gespielt": false,
-          "tore": 1,
-          "vorl": 4
+          "tore": 0,
+          "vorl": 0
         },
         {
           "name": "Noah",
@@ -527,23 +527,23 @@
       "matches": [
         {
           "gegner": "BSV Lockwitzgrund 2",
-          "sf01": null,
-          "opp": null
+          "sf01": 6,
+          "opp": 1
         },
         {
           "gegner": "FV Dresden 06 Laubegast 4",
-          "sf01": null,
-          "opp": null
+          "sf01": 4,
+          "opp": 0
         },
         {
           "gegner": "Radeberger SV 2",
-          "sf01": null,
-          "opp": null
+          "sf01": 2,
+          "opp": 0
         },
         {
           "gegner": "SV Dresden-Neustadt",
-          "sf01": null,
-          "opp": null
+          "sf01": 4,
+          "opp": 6
         }
       ]
     },

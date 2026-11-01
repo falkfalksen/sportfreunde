@@ -431,7 +431,7 @@
     {
       "date": "01.11.2026",
       "venue": "BSV Lockwitzgrund 2",
-      "trikot": "",
+      "trikot": "Luis",
       "players": [
         {
           "name": "Friedi",
@@ -440,10 +440,22 @@
           "vorl": 0
         },
         {
+          "name": "Alexander",
+          "gespielt": true,
+          "tore": 7,
+          "vorl": 3
+        },
+        {
+          "name": "Julian",
+          "gespielt": true,
+          "tore": 7,
+          "vorl": 4
+        },        
+        {
           "name": "Jakob",
           "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "tore": 1,
+          "vorl": 4
         },
         {
           "name": "Noah",

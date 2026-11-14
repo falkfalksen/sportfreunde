@@ -550,37 +550,49 @@
     {
       "date": "14.11.2026",
       "venue": "FV Dresden 06 Laubegast 4",
-      "trikot": "",
+      "trikot": "Walter",
       "players": [
         {
           "name": "Friedi",
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
           "gespielt": false,
           "tore": 0,
           "vorl": 0
         },
         {
           "name": "Jakob",
-          "gespielt": false,
-          "tore": 0,
+          "gespielt": true,
+          "tore": 2,
           "vorl": 0
         },
         {
           "name": "Noah",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
-          "vorl": 0
+          "vorl": 2
         },
         {
           "name": "Luis",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
-          "vorl": 0
+          "vorl": 1
         },
         {
           "name": "Maximilian",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
-          "vorl": 0
+          "vorl": 1
         },
         {
           "name": "Nepomuk",
@@ -590,9 +602,9 @@
         },
         {
           "name": "Oskar",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 3
         },
         {
           "name": "Paul",
@@ -602,8 +614,8 @@
         },
         {
           "name": "Richard",
-          "gespielt": false,
-          "tore": 0,
+          "gespielt": true,
+          "tore": 4,
           "vorl": 0
         },
         {
@@ -620,13 +632,13 @@
         },
         {
           "name": "Heino",
-          "gespielt": false,
-          "tore": 0,
+          "gespielt": true,
+          "tore": 1,
           "vorl": 0
         },
         {
           "name": "Walter",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         }
@@ -634,23 +646,23 @@
       "matches": [
         {
           "gegner": "FV B/W Zschachwitz 3",
-          "sf01": null,
-          "opp": null
+          "sf01": 5,
+          "opp": 4
         },
         {
           "gegner": "FV Dresden 06 Laubegast 4",
-          "sf01": null,
-          "opp": null
+          "sf01": 0,
+          "opp": 2
         },
         {
           "gegner": "Radeberger SV 2",
-          "sf01": null,
-          "opp": null
+          "sf01": 2,
+          "opp": 1
         },
         {
           "gegner": "SV Helios 24 Dresden 3",
-          "sf01": null,
-          "opp": null
+          "sf01": 2,
+          "opp": 6
         }
       ]
     },
@@ -661,6 +673,18 @@
       "players": [
         {
           "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
           "gespielt": false,
           "tore": 0,
           "vorl": 0
@@ -763,11 +787,23 @@
     },
     {
       "date": "28.11.2026",
-      "venue": "FV Löbtauer Kickers 3 (2)",
+      "venue": "FV Löbtauer Kickers 3",
       "trikot": "",
       "players": [
         {
           "name": "Friedi",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
           "gespielt": false,
           "tore": 0,
           "vorl": 0

@@ -110,7 +110,7 @@ tr.sf01-loss td{background:#fff5f5}
     <button id="export-btn" onclick="exportDataJson()" title="Daten als data.json speichern">⬇ Exportieren</button>
     <span id="last-saved"></span>
     <span id="last-export"></span>
-    <img src="https://hits.sh/falkfalksen.github.io/sportfreunde.svg?style=flat-square&label=Aufrufe&color=dc2626&labelColor=333" alt="Seitenaufrufe" style="height:18px;opacity:0.7">
+    <img id="hits-counter" src="https://hits.sh/falkfalksen.github.io/sportfreunde.svg?style=flat-square&label=Aufrufe&color=dc2626&labelColor=333" alt="Seitenaufrufe" style="height:18px;opacity:0.7">
   </div>
 </header>
 
@@ -1066,6 +1066,9 @@ function applyEditMode() {
 
   const lastExport = document.getElementById('last-export');
   if (lastExport) lastExport.style.visibility = editMode ? 'visible' : 'hidden';
+
+  const hitsCounter = document.getElementById('hits-counter');
+  if (hitsCounter) hitsCounter.style.visibility = editMode ? 'visible' : 'hidden';
 
   const exportBtn = document.getElementById('export-btn');
   if (exportBtn) exportBtn.style.display = editMode ? 'block' : 'none';

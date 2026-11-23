@@ -1016,6 +1016,15 @@ async function exportDataJson() {
     return;
   }
 
+  function downloadFallback() {
+    const a = document.createElement('a');
+    a.href = 'data:application/json,' + encodeURIComponent(json);
+    a.download = 'data.json';
+    a.click();
+    updateExportTimestamp();
+    showExportToast('data.json heruntergeladen');
+  }
+
   try {
     let handle = await getStoredHandle();
     if (handle) {
@@ -1038,7 +1047,9 @@ async function exportDataJson() {
     updateExportTimestamp();
     showExportToast('data.json gespeichert ✓');
   } catch(e) {
-    if (e.name !== 'AbortError') alert('Fehler: ' + e.message);
+    if (e.name === 'AbortError') return;
+    // Fallback: direct download when file handle fails
+    downloadFallback();
   }
 }
 function showExportToast(msg) {

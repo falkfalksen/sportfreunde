@@ -669,13 +669,13 @@
     {
       "date": "22.11.2026",
       "venue": "FV B/W Zschachwitz 3",
-      "trikot": "",
+      "trikot": "Theo",
       "players": [
         {
           "name": "Friedi",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
-          "vorl": 0
+          "vorl": 1
         },
         {
           "name": "Alexander",
@@ -691,25 +691,25 @@
         },
         {
           "name": "Jakob",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 1
         },
         {
           "name": "Noah",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         },
         {
           "name": "Luis",
-          "gespielt": false,
-          "tore": 0,
+          "gespielt": true,
+          "tore": 2,
           "vorl": 0
         },
         {
           "name": "Maximilian",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         },
@@ -721,9 +721,9 @@
         },
         {
           "name": "Oskar",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "gespielt": true,
+          "tore": 2,
+          "vorl": 3
         },
         {
           "name": "Paul",
@@ -733,9 +733,9 @@
         },
         {
           "name": "Richard",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
+          "gespielt": true,
+          "tore": 5,
+          "vorl": 2
         },
         {
           "name": "Friedrich",
@@ -751,13 +751,19 @@
         },
         {
           "name": "Heino",
-          "gespielt": false,
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         },
         {
           "name": "Walter",
-          "gespielt": false,
+          "gespielt": true,
+          "tore": 0,
+          "vorl": 1
+        },
+        {
+          "name": "Theo",
+          "gespielt": true,
           "tore": 0,
           "vorl": 0
         }
@@ -765,23 +771,23 @@
       "matches": [
         {
           "gegner": "FV B/W Zschachwitz 3",
-          "sf01": null,
-          "opp": null
+          "sf01": 3,
+          "opp": 1
         },
         {
           "gegner": "FV Löbtauer Kickers 3",
-          "sf01": null,
-          "opp": null
+          "sf01": 5,
+          "opp": 0
         },
         {
           "gegner": "Radeberger SV 2",
-          "sf01": null,
-          "opp": null
+          "sf01": 2,
+          "opp": 1
         },
         {
           "gegner": "SV Dresden-Neustadt",
-          "sf01": null,
-          "opp": null
+          "sf01": 3,
+          "opp": 3
         }
       ]
     },
@@ -876,6 +882,12 @@
         },
         {
           "name": "Walter",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Theo",
           "gespielt": false,
           "tore": 0,
           "vorl": 0

@@ -239,7 +239,7 @@ tr.sf01-loss td{background:#fff5f5}
 const JERSEY = `<svg width="13" height="13" viewBox="0 0 24 24" style="vertical-align:middle"><path d="M9 2C8 4 5.5 4.5 5 4.5L1 8l4.5 2V22h13V10L23 8l-4-3.5C18.5 4.5 16 2 15 2c-1 2-4 2-6 0Z" fill="#ef4444"/><path d="M9 2c1 2 5 2 6 0L13.5 7h-3Z" fill="white"/></svg>`;
 const STORAGE_KEY = 'e2_sf01_2026_v2';
 
-const PLAYERS_H = ['Friedi','Alexander','Julian','Jakob','Noah','Luis','Maximilian','Nepomuk','Oskar','Paul','Richard','Friedrich','Branko','Heino','Walter'];
+const PLAYERS_H = ['Friedi','Alexander','Julian','Jakob','Noah','Luis','Maximilian','Nepomuk','Oskar','Paul','Richard','Friedrich','Branko','Heino','Walter','Theo'];
 const PLAYERS_R = ['Friedi','Jakob','Frodo','Luis','Maximilian','Nepomuk','Oskar','Paul','Richard','Friedrich','Branko','Heino','Walter'];
 const ALL_PLAYERS = [...new Set([...PLAYERS_H, ...PLAYERS_R])];
 
@@ -389,6 +389,17 @@ function loadData() {
       // migrate: add trikot field if missing
       ['hinrunde','rueckrunde'].forEach(rnd => {
         if (DATA[rnd]) DATA[rnd].forEach(t => { if (!('trikot' in t)) t.trikot = ''; });
+      });
+      // migrate: add players that were added to PLAYERS_H/PLAYERS_R after initial save
+      const playerLists = { hinrunde: PLAYERS_H, rueckrunde: PLAYERS_R };
+      ['hinrunde','rueckrunde'].forEach(rnd => {
+        if (!DATA[rnd]) return;
+        DATA[rnd].forEach(t => {
+          const existing = new Set(t.players.map(p => p.name));
+          playerLists[rnd].forEach(name => {
+            if (!existing.has(name)) t.players.push({name, gespielt:false, tore:0, vorl:0});
+          });
+        });
       });
       return;
     } catch(e) {}

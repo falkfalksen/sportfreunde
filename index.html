@@ -62,6 +62,7 @@ tr.sf01-loss td{background:#fff5f5}
 .result-row .opp-name{flex:1;min-width:180px}
 .score-sep{font-weight:700;color:#666}
 .stat-number{text-align:right;font-variant-numeric:tabular-nums}
+#stats-table tfoot td{font-weight:600;border-top:2px solid #e2e8f0;background:#f8fafc}
 .highlight{font-weight:700;color:#dc2626}
 #save-toast{position:fixed;bottom:20px;right:20px;background:#111;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;display:none;animation:fadein .3s}
 #export-toast{position:fixed;bottom:20px;left:20px;background:#166534;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;display:none;animation:fadein .3s}
@@ -169,6 +170,7 @@ tr.sf01-loss td{background:#fff5f5}
         </thead>
         </tr></thead>
         <tbody id="stats-tbody"></tbody>
+        <tfoot id="stats-tfoot"></tfoot>
       </table>
     </div>
   </div>
@@ -757,6 +759,27 @@ function renderStatistik() {
       <td class="stat-number">${r.vorl_r}</td>`;
     tbody.appendChild(tr);
   });
+  const sum = rows.reduce((a,r) => ({
+    spiele:   a.spiele   + r.spiele,
+    tore:     a.tore     + r.tore,
+    vorlagen: a.vorlagen + r.vorlagen,
+    scorer:   a.scorer   + r.scorer,
+    spiele_h: a.spiele_h + r.spiele_h, tore_h: a.tore_h + r.tore_h, vorl_h: a.vorl_h + r.vorl_h,
+    spiele_r: a.spiele_r + r.spiele_r, tore_r: a.tore_r + r.tore_r, vorl_r: a.vorl_r + r.vorl_r
+  }), {spiele:0,tore:0,vorlagen:0,scorer:0,spiele_h:0,tore_h:0,vorl_h:0,spiele_r:0,tore_r:0,vorl_r:0});
+  document.getElementById('stats-tfoot').innerHTML = `<tr>
+    <td>Gesamt</td>
+    <td class="stat-number">${sum.spiele}</td>
+    <td class="stat-number">${sum.tore}</td>
+    <td class="stat-number">${sum.vorlagen}</td>
+    <td class="stat-number">${sum.scorer}</td>
+    <td class="stat-number group-sep">${sum.spiele_h}</td>
+    <td class="stat-number">${sum.tore_h}</td>
+    <td class="stat-number">${sum.vorl_h}</td>
+    <td class="stat-number group-sep">${sum.spiele_r}</td>
+    <td class="stat-number">${sum.tore_r}</td>
+    <td class="stat-number">${sum.vorl_r}</td>
+  </tr>`;
   document.querySelectorAll('#stats-table th.sortable').forEach(th => {
     th.classList.toggle('sort-active', th.dataset.col === statsSort.col);
   });

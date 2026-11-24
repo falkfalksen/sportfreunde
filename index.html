@@ -769,14 +769,14 @@ function renderStatistik() {
   }), {spiele:0,tore:0,vorlagen:0,scorer:0,spiele_h:0,tore_h:0,vorl_h:0,spiele_r:0,tore_r:0,vorl_r:0});
   document.getElementById('stats-tfoot').innerHTML = `<tr>
     <td>Gesamt</td>
-    <td class="stat-number">${sum.spiele}</td>
+    <td class="stat-number">–</td>
     <td class="stat-number">${sum.tore}</td>
     <td class="stat-number">${sum.vorlagen}</td>
     <td class="stat-number">${sum.scorer}</td>
-    <td class="stat-number group-sep">${sum.spiele_h}</td>
+    <td class="stat-number group-sep">–</td>
     <td class="stat-number">${sum.tore_h}</td>
     <td class="stat-number">${sum.vorl_h}</td>
-    <td class="stat-number group-sep">${sum.spiele_r}</td>
+    <td class="stat-number group-sep">–</td>
     <td class="stat-number">${sum.tore_r}</td>
     <td class="stat-number">${sum.vorl_r}</td>
   </tr>`;

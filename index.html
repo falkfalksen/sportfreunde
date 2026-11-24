@@ -405,10 +405,19 @@ function loadData() {
       ['hinrunde','rueckrunde'].forEach(rnd => {
         if (!DATA[rnd]) return;
         DATA[rnd].forEach(t => {
-          const existing = new Set(t.players.map(p => p.name));
-          playerLists[rnd].forEach(name => {
-            if (!existing.has(name)) t.players.push({name, gespielt:false, tore:0, vorl:0});
-          });
+          if (!t.excludedPlayers) {
+            // First run: treat existing players as authoritative.
+            // Any PLAYERS_H/R member missing from t.players goes into excludedPlayers.
+            const existing = new Set(t.players.map(p => p.name));
+            t.excludedPlayers = playerLists[rnd].filter(n => !existing.has(n));
+          } else {
+            // Normal migration: add players added to PLAYERS_H/R after initial save
+            const existing = new Set(t.players.map(p => p.name));
+            playerLists[rnd].forEach(name => {
+              if (!existing.has(name) && !t.excludedPlayers.includes(name))
+                t.players.push({name, gespielt:false, tore:0, vorl:0});
+            });
+          }
         });
       });
       return;
@@ -468,7 +477,7 @@ function renderNewTurnierForm() {
     const d = document.getElementById('nf-date').value.trim();
     const v = document.getElementById('nf-venue').value.trim();
     if (!d || !v) { alert('Bitte Datum und Austragungsort eingeben.'); return; }
-    DATA.rueckrunde.push({ date:d, venue:v, trikot:'', players:mkPlayerStats(PLAYERS_R), matches:[] });
+    DATA.rueckrunde.push({ date:d, venue:v, trikot:'', excludedPlayers:[], players:mkPlayerStats(PLAYERS_R), matches:[] });
     currentTIdx = DATA.rueckrunde.length - 1;
     showNewTurnierForm = false;
     saveData();
@@ -504,10 +513,11 @@ function renderTurnierContent() {
       </div>
       <div style="padding:0;overflow-x:auto">
         <table>
-          <thead><tr><th>Spieler</th><th>Gespielt</th><th>Tore</th><th>Vorlagen</th></tr></thead>
+          <thead><tr><th>Spieler</th><th>Gespielt</th><th>Tore</th><th>Vorlagen</th><th></th></tr></thead>
           <tbody id="player-tbody"></tbody>
         </table>
       </div>
+      <div id="add-player-ctrl" style="padding:8px 12px;border-top:1px solid #f0f0f0"></div>
     </div>
     <div class="card">
       <div class="card-header">
@@ -557,7 +567,8 @@ function renderPlayerTable() {
       <td>${p.name}</td>
       <td><input type="checkbox" ${p.gespielt?'checked':''} data-pi="${pi}"></td>
       <td><input type="number" min="0" max="20" value="${p.tore||0}" data-pi="${pi}" data-field="tore" ${p.gespielt?'':'disabled'}></td>
-      <td><input type="number" min="0" max="20" value="${p.vorl||0}" data-pi="${pi}" data-field="vorl" ${p.gespielt?'':'disabled'}></td>`;
+      <td><input type="number" min="0" max="20" value="${p.vorl||0}" data-pi="${pi}" data-field="vorl" ${p.gespielt?'':'disabled'}></td>
+      <td><button class="btn btn-danger btn-sm" data-pi="${pi}" title="Entfernen">✕</button></td>`;
     tbody.appendChild(tr);
   });
 
@@ -581,6 +592,38 @@ function renderPlayerTable() {
       saveData();
     };
   });
+  tbody.querySelectorAll('.btn-danger').forEach(btn => {
+    btn.onclick = () => {
+      const pi = +btn.dataset.pi;
+      const t = DATA[currentRound][currentTIdx];
+      const name = t.players[pi].name;
+      t.players.splice(pi, 1);
+      if (ALL_PLAYERS.includes(name) && !t.excludedPlayers.includes(name))
+        t.excludedPlayers.push(name);
+      saveData();
+      renderPlayerTable();
+    };
+  });
+
+  // Add-player control
+  const existing = new Set(t.players.map(p => p.name));
+  const suggestions = ALL_PLAYERS.filter(n => !existing.has(n));
+  const ctrl = document.getElementById('add-player-ctrl');
+  ctrl.innerHTML = `
+    <datalist id="player-dl">${suggestions.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+      <input id="add-player-input" type="text" list="player-dl" placeholder="Spieler hinzufügen…" style="flex:1;min-width:140px">
+      <button class="btn btn-add btn-sm" id="add-player-btn">+ Hinzufügen</button>
+    </div>`;
+  document.getElementById('add-player-btn').onclick = () => {
+    const name = document.getElementById('add-player-input').value.trim();
+    if (!name || t.players.some(p => p.name === name)) return;
+    t.players.push({name, gespielt:false, tore:0, vorl:0});
+    const exIdx = t.excludedPlayers.indexOf(name);
+    if (exIdx >= 0) t.excludedPlayers.splice(exIdx, 1);
+    saveData();
+    renderPlayerTable();
+  };
 }
 
 function renderMatches() {
@@ -983,84 +1026,62 @@ document.getElementById('tabelle-reset-sort').onclick = () => {
 };
 
 // ---- Data Export ----
-function openIDB() {
-  return new Promise((res, rej) => {
-    const req = indexedDB.open('sf01_fs', 1);
-    req.onupgradeneeded = e => e.target.result.createObjectStore('handles');
-    req.onsuccess = e => res(e.target.result);
-    req.onerror = () => rej(req.error);
-  });
-}
-async function getStoredHandle() {
-  try {
-    const db = await openIDB();
-    return new Promise(res => {
-      const tx = db.transaction('handles', 'readonly');
-      const g = tx.objectStore('handles').get('dataJson');
-      g.onsuccess = () => res(g.result || null);
-      g.onerror  = () => res(null);
-    });
-  } catch { return null; }
-}
-async function storeHandle(handle) {
-  try {
-    const db = await openIDB();
-    await new Promise(res => {
-      const tx = db.transaction('handles', 'readwrite');
-      tx.objectStore('handles').put(handle, 'dataJson');
-      tx.oncomplete = res;
-    });
-  } catch {}
-}
+let _exportHandle = null; // cached for this session; avoids IDB async before showSaveFilePicker
+
 async function exportDataJson() {
   const json = JSON.stringify(DATA, null, 2);
 
+  // Cached handle → write directly, no user-gesture needed
+  if (_exportHandle) {
+    try {
+      const writable = await _exportHandle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      updateExportTimestamp();
+      showExportToast('data.json gespeichert ✓');
+      return;
+    } catch(e) {
+      _exportHandle = null;
+      showExportToast('Bitte nochmal klicken ↩');
+      return;
+    }
+  }
+
+  // No cached handle → show picker immediately (user gesture from button click still active)
   if (!window.showSaveFilePicker) {
-    // Fallback für Browser ohne File System Access API
-    const a = document.createElement('a');
-    a.href = 'data:application/json,' + encodeURIComponent(json);
-    a.download = 'data.json';
-    a.click();
-    updateExportTimestamp();
-    showExportToast('data.json heruntergeladen');
+    blobDownload(json);
     return;
   }
 
-  function downloadFallback() {
-    const a = document.createElement('a');
-    a.href = 'data:application/json,' + encodeURIComponent(json);
-    a.download = 'data.json';
-    a.click();
-    updateExportTimestamp();
-    showExportToast('data.json heruntergeladen');
-  }
-
   try {
-    let handle = await getStoredHandle();
-    if (handle) {
-      const perm = await handle.queryPermission({mode:'readwrite'});
-      if (perm !== 'granted') {
-        const req = await handle.requestPermission({mode:'readwrite'});
-        if (req !== 'granted') handle = null;
-      }
-    }
-    if (!handle) {
-      handle = await window.showSaveFilePicker({
-        suggestedName: 'data.json',
-        types: [{ description: 'JSON', accept: {'application/json': ['.json']} }]
-      });
-      await storeHandle(handle);
-    }
-    const writable = await handle.createWritable();
+    _exportHandle = await window.showSaveFilePicker({
+      suggestedName: 'data.json',
+      types: [{ description: 'JSON', accept: {'application/json': ['.json']} }]
+    });
+    const writable = await _exportHandle.createWritable();
     await writable.write(json);
     await writable.close();
     updateExportTimestamp();
     showExportToast('data.json gespeichert ✓');
   } catch(e) {
+    _exportHandle = null;
     if (e.name === 'AbortError') return;
-    // Fallback: direct download when file handle fails
-    downloadFallback();
+    blobDownload(json);
   }
+}
+
+function blobDownload(json) {
+  const blob = new Blob([json], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  updateExportTimestamp();
+  showExportToast('data.json heruntergeladen');
 }
 function showExportToast(msg) {
   const t = document.getElementById('export-toast');

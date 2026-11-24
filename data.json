@@ -82,6 +82,24 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 0
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -105,7 +123,8 @@
           "sf01": 2,
           "opp": 4
         }
-      ]
+      ],
+      "excludedPlayers": []
     },
     {
       "date": "06.09.2025",
@@ -189,6 +208,24 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 0
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -212,7 +249,8 @@
           "sf01": 0,
           "opp": 8
         }
-      ]
+      ],
+      "excludedPlayers": []
     },
     {
       "date": "26.09.2026",
@@ -296,6 +334,24 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 3
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -319,7 +375,8 @@
           "sf01": 5,
           "opp": 1
         }
-      ]
+      ],
+      "excludedPlayers": []
     },
     {
       "date": "03.10.2026",
@@ -403,6 +460,24 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 1
+        },
+        {
+          "name": "Alexander",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Julian",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -426,7 +501,8 @@
           "sf01": 2,
           "opp": 2
         }
-      ]
+      ],
+      "excludedPlayers": []
     },
     {
       "date": "01.11.2026",
@@ -522,6 +598,12 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -545,7 +627,8 @@
           "sf01": 4,
           "opp": 6
         }
-      ]
+      ],
+      "excludedPlayers": []
     },
     {
       "date": "14.11.2026",
@@ -555,18 +638,6 @@
         {
           "name": "Friedi",
           "gespielt": true,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
           "tore": 0,
           "vorl": 0
         },
@@ -641,6 +712,12 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 0
+        },
+        {
+          "name": "Theo",
+          "gespielt": false,
+          "tore": 0,
+          "vorl": 0
         }
       ],
       "matches": [
@@ -664,6 +741,10 @@
           "sf01": 2,
           "opp": 6
         }
+      ],
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
       ]
     },
     {
@@ -676,18 +757,6 @@
           "gespielt": true,
           "tore": 0,
           "vorl": 1
-        },
-        {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
         },
         {
           "name": "Jakob",
@@ -789,6 +858,10 @@
           "sf01": 3,
           "opp": 3
         }
+      ],
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
       ]
     },
     {
@@ -798,18 +871,6 @@
       "players": [
         {
           "name": "Friedi",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
           "gespielt": false,
           "tore": 0,
           "vorl": 0
@@ -895,25 +956,29 @@
       ],
       "matches": [
         {
-          "gegner": "BSV Lockwitzgrund 2",
+          "gegner": "FV Löbtauer Kickers 3",
           "sf01": null,
           "opp": null
         },
         {
-          "gegner": "FV B/W Zschachwitz 3",
+          "gegner": "1. FFC Fortuna Dresden 2 (Mä)",
           "sf01": null,
           "opp": null
         },
         {
-          "gegner": "FV Dresden 06 Laubegast 4",
+          "gegner": "SC Borea Dresden 5",
           "sf01": null,
           "opp": null
         },
         {
-          "gegner": "Radeberger SV 2",
+          "gegner": "SV Dresden-Neustadt",
           "sf01": null,
           "opp": null
         }
+      ],
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
       ]
     }
   ],

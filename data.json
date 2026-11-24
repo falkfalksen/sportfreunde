@@ -84,18 +84,6 @@
           "vorl": 0
         },
         {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
           "name": "Theo",
           "gespielt": false,
           "tore": 0,
@@ -124,7 +112,10 @@
           "opp": 4
         }
       ],
-      "excludedPlayers": []
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
+      ]
     },
     {
       "date": "06.09.2025",
@@ -210,18 +201,6 @@
           "vorl": 0
         },
         {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
           "name": "Theo",
           "gespielt": false,
           "tore": 0,
@@ -250,7 +229,10 @@
           "opp": 8
         }
       ],
-      "excludedPlayers": []
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
+      ]
     },
     {
       "date": "26.09.2026",
@@ -336,18 +318,6 @@
           "vorl": 3
         },
         {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
           "name": "Theo",
           "gespielt": false,
           "tore": 0,
@@ -376,7 +346,10 @@
           "opp": 1
         }
       ],
-      "excludedPlayers": []
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
+      ]
     },
     {
       "date": "03.10.2026",
@@ -462,18 +435,6 @@
           "vorl": 1
         },
         {
-          "name": "Alexander",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
-          "name": "Julian",
-          "gespielt": false,
-          "tore": 0,
-          "vorl": 0
-        },
-        {
           "name": "Theo",
           "gespielt": false,
           "tore": 0,
@@ -502,7 +463,10 @@
           "opp": 2
         }
       ],
-      "excludedPlayers": []
+      "excludedPlayers": [
+        "Alexander",
+        "Julian"
+      ]
     },
     {
       "date": "01.11.2026",
